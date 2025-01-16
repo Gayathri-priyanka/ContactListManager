@@ -1,0 +1,23 @@
+{
+  "name": "contactlistmanager",
+  "version": "1.0.0",
+  "description": "A Contact list manager application with the functionality of adding contacts and viewing contacts using React.js, Node.js, MongoDB, Express.js",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Gayathri-priyanka/ContactListManager.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Gayathri-priyanka/ContactListManager/issues"
+  },
+  "homepage": "https://github.com/Gayathri-priyanka/ContactListManager#readme",
+  "dependencies": {
+    "express": "^4.21.2"
+  }
+}
