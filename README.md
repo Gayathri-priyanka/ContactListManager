@@ -28,13 +28,11 @@ git clone <repository-url>
 cd contact-list-manager
 **2. Set Up the Back-End (Node.js, Express, MongoDB)**  
 
-Navigate to the api folder:
+Navigate to the api folder:  
 cd api
-Install the required dependencies:
+Install the required dependencies:  
 npm install
-Create a .env file in the api folder with the following content:
-MONGO=mongodb://localhost:27017/contact-list-manager
-You can replace the MongoDB URL with your cloud MongoDB URL if using MongoDB Atlas.
+Create a .env file in the api folder with the connection string of database.  
 
 **Start the server:**  
 npm start
@@ -42,12 +40,12 @@ The server should now be running on http://localhost:3000.
 
 **3. Set Up the Front-End (React)**  
 
-Navigate to the client folder:
-cd client
-Install the required dependencies:
-npm install
-Start the React development server:
-npm run dev
+Navigate to the client folder:  
+cd client  
+Install the required dependencies:  
+npm install  
+Start the React development server:  
+npm run dev  
 The front-end should now be running on http://localhost:5173.
 
 ## Application Functionality
@@ -61,14 +59,15 @@ Displays a list of all contacts fetched from the server.
 Each contact shows the name and email.  
 **Search:** Users can search contacts by name or email.  
 **Delete:** Users can delete a contact by clicking the delete button next to the contact.  
-Server (Express.js)  
-The back-end uses Express.js to handle requests from the front-end.   
+**Server (Express.js)**  
+The back-end uses Express.js to handle requests from the front-end.    
 POST /contacts: Adds a new contact to the database.  
 GET /contacts: Fetches all contacts from the database and returns them.  
 DELETE /contacts/:id: Deletes a contact based on its ID.  
-MongoDB  
-MongoDB is used to store the contact data. It allows for efficient searching, adding, and deleting of contacts.  
-Pending Features
+**MongoDB**
+MongoDB is used to store the contact data. It allows for efficient searching, adding, and deleting of contacts.   
+
+## Pending Features
 
 **Scrollbar in Contact List:** The contact list will soon include a scrollbar for better navigation when there are many contacts.  
 **Styling:** Additional styles can be applied for an even more polished user interface.  
