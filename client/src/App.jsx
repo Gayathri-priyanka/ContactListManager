@@ -2,13 +2,13 @@ import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import ContactForm from './components/ContactForm';
 import ContactList from './components/ContactList';
-
+import './styles/global.css'; 
 
 
 const App = () => {
   const [contacts, setContacts] = useState([]);
 
-  // Fetch all contacts
+
   const fetchContacts = async () => {
     try {
       const response = await axios.get('http://localhost:3000/contacts');
@@ -17,8 +17,6 @@ const App = () => {
       console.error('Error fetching contacts:', error);
     }
   };
-
-  // Fetch contacts on component mount
   useEffect(() => {
     fetchContacts();
   }, []);
