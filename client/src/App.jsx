@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import ContactForm from './components/ContactForm';
+import ContactList from './components/ContactList';
 
 
 
@@ -26,6 +27,7 @@ const App = () => {
     <div>
       <h1>Contact List Manager</h1>
       <ContactForm fetchContacts={fetchContacts} />
+      <ContactList contacts={contacts} />
     </div>
   );
 };
