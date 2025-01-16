@@ -1,53 +1,73 @@
 import React, { useState } from 'react';
 import axios from 'axios';
 
-const ContactForm = () => {
+const ContactForm = ({ onContactAdded }) => {
   const [name, setName] = useState('');
   const [email, setEmail] = useState('');
-  const [errorMessage, setErrorMessage] = useState(''); 
+  const [isSubmitting, setIsSubmitting] = useState(false);
+
+  const handleNameChange = (e) => {
+    setName(e.target.value);
+  };
+
+  const handleEmailChange = (e) => {
+    setEmail(e.target.value);
+  };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-
     if (!name || !email) {
-      alert('Both fields are required!');
+      alert('Please fill out both fields.');
       return;
     }
 
+    setIsSubmitting(true);
+
     try {
-      await axios.post('http://localhost:3000/contacts', { name, email });
+      const response = await axios.post('http://localhost:3000/contacts', {
+        name,
+        email,
+      });
+
+      onContactAdded(response.data);
       setName('');
       setEmail('');
-      setErrorMessage(''); 
     } catch (error) {
-      if (error.response && error.response.status === 409) {
-        setErrorMessage('A contact with this email already exists.');
-      } else {
-        setErrorMessage('An unexpected error occurred. Please try again.');
-      }
+      console.error('Error adding contact:', error);
+    } finally {
+      setIsSubmitting(false);
     }
   };
 
   return (
     <div className="container">
       <h2>Add New Contact</h2>
-      <form onSubmit={handleSubmit}>
-        <input
-          type="text"
-          value={name}
-          onChange={(e) => setName(e.target.value)}
-          placeholder="Enter name"
-          className="input-field" 
-        />
-        <input
-          type="text"
-          value={email}
-          onChange={(e) => setEmail(e.target.value)}
-          placeholder="Enter email"
-          className="input-field"
-        />
-        <button type="submit" className="add-button">Add Contact</button>
-        {errorMessage && <p className="error-message">{errorMessage}</p>} 
+      <form onSubmit={handleSubmit} className="contact-form">
+        <div className="form-group">
+          <label htmlFor="name">Name</label>
+          <input
+            type="text"
+            id="name"
+            value={name}
+            onChange={handleNameChange}
+            placeholder="Enter name"
+            className="input-field"
+          />
+        </div>
+        <div className="form-group">
+          <label htmlFor="email">Email</label>
+          <input
+            type="email"
+            id="email"
+            value={email}
+            onChange={handleEmailChange}
+            placeholder="Enter email"
+            className="input-field"
+          />
+        </div>
+        <button type="submit" className="primary-button" disabled={isSubmitting}>
+          {isSubmitting ? 'Adding...' : 'Add Contact'}
+        </button>
       </form>
     </div>
   );
