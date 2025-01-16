@@ -24,7 +24,7 @@ app.use(cors({
 app.listen(3000,()=>{
     console.log("Server is running on 3000");
 });
-
+//Route to add a new contact
 app.post('/contacts', async (req, res) => {
     try {
       const { name, email } = req.body;
@@ -34,6 +34,25 @@ app.post('/contacts', async (req, res) => {
       const newContact = new Contact({ name, email });
       await newContact.save();
       res.status(201).send(newContact);
+    } catch (error) {
+      res.status(500).send(error.message);
+    }
+  });
+
+  //Fetch contacts or search
+  app.get('/contacts', async (req, res) => {
+    try {
+      const { query } = req.query;
+      const regex = new RegExp(query, 'i');  
+  
+      const contacts = await Contact.find({
+        $or: [
+          { name: { $regex: regex } },
+          { email: { $regex: regex } }
+        ]
+      });
+  
+      res.status(200).send(contacts); 
     } catch (error) {
       res.status(500).send(error.message);
     }
